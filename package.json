@@ -1,0 +1,58 @@
+{
+  "name": "email-viewer",
+  "version": "1.0.0",
+  "description": "Email Viewer demo app",
+  "main": "dist/index.html",
+  "scripts": {
+    "test": "webpack --mode production",
+    "start": "webpack-dev-server --mode development --hot --inline --colors"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "David Beale",
+    "url": "http://bealearts.co.uk/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com:DavidBeale/email-viewer.git"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "connected-react-router": "^4.3.0",
+    "history": "^4.7.2",
+    "prop-types": "^15.6.2",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-redux": "^5.0.7",
+    "redux": "^3.7.2",
+    "redux-async-await-action-middleware": "0.0.1",
+    "redux-logger": "^3.0.6"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^8.2.6",
+    "babel-loader": "^7.1.5",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-preset-env": "^1.7.0",
+    "css-loader": "^1.0.0",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^17.0.0",
+    "eslint-loader": "^2.1.0",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.10.0",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "file-loader": "^1.1.11",
+    "html-webpack-plugin": "^3.2.0",
+    "imagemin": "^5.3.1",
+    "img-loader": "^3.0.0",
+    "less": "^3.7.1",
+    "less-loader": "^4.1.0",
+    "style-loader": "^0.21.0",
+    "url-loader": "^1.0.1",
+    "webpack": "^4.16.1",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.4"
+  }
+}
