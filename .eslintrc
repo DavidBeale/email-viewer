@@ -19,6 +19,7 @@
         "comma-dangle": ["error", "never"],
         "no-use-before-define": ["off"],
         "no-unused-vars": ["warn"],
-        "no-prototype-builtins": ["off"]
+        "no-prototype-builtins": ["off"],
+        "react/jsx-one-expression-per-line": ["off"]
     }
 }

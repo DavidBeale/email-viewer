@@ -2,7 +2,7 @@ import { createStore, applyMiddleware } from 'redux';
 import { createLogger } from 'redux-logger';
 import { createBrowserHistory } from 'history';
 import { connectRouter, routerMiddleware } from 'connected-react-router';
-import { createAsyncAwaitActionMiddleware } from 'redux-async-await-action-middleware';
+import { createAsyncAwaitMiddleware } from 'redux-async-await-action-middleware';
 
 import rootReducer from './reducers';
 
@@ -13,7 +13,7 @@ export default function configureStore(preloadedState) {
     connectRouter(history)(rootReducer),
     preloadedState,
     applyMiddleware(
-      createAsyncAwaitActionMiddleware(),
+      createAsyncAwaitMiddleware(),
       routerMiddleware(history),
       createLogger()
     )

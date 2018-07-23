@@ -1,6 +1,7 @@
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const pkg = require('./package.json');
 
@@ -11,7 +12,8 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, './dist'),
     filename: 'bundle-[hash].js',
-    libraryTarget: 'umd'
+    libraryTarget: 'umd',
+    publicPath: '/'
   },
   resolve: {
     extensions: ['.js', '.mjs', '.json']
@@ -22,16 +24,11 @@ module.exports = {
         test: /\.mjs$/,
         exclude: /node_modules/,
         type: 'javascript/auto',
-        use: {
+        use: [{
           loader: 'babel-loader'
-        }
-      },
-      {
-        test: /\.mjs$/,
-        exclude: /node_modules/,
-        use: {
+        }, {
           loader: 'eslint-loader'
-        }
+        }]
       },
       {
         test: /\.less$/,
@@ -71,10 +68,14 @@ module.exports = {
     ]
   },
   plugins: [
+    new CopyWebpackPlugin([
+      { from: path.resolve(__dirname, './data'), to: 'data' }
+    ]),
     new ExtractTextPlugin({
       filename: 'bundle-[hash].css'
     }),
     new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, './src/index.html'),
       version: pkg.version
     })
   ],
