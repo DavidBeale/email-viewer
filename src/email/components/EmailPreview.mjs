@@ -1,18 +1,43 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Switch, Route } from 'react-router-dom';
+
+import EmailTypeNav from './EmailTypeNav';
+import HTMLFrame from '../../common/components/HTMLFrame';
+
+import './EmailPreview.less';
 
 export default function EmailPreview({ currentEmail }) {
-  const { name, subjects, body } = currentEmail;
+  const {
+    id, name, subjects, body
+  } = currentEmail;
   return (
-    <article>
-      <div>
-        <strong>Message Name</strong><span>{name}</span>
-      </div>
-      <div>
-        <strong>Subject Line</strong><span>{subjects ? subjects.join() : null}</span>
-      </div>
-      <section>
-        {body ? body.text : 'Loading...'}
+    <article className="email-preview">
+      <dl className="dl-horizontal">
+        <dt>Message Name</dt>
+        <dd>{name}</dd>
+      </dl>
+
+      <dl className="dl-horizontal">
+        <dt>Subject Line</dt>
+        <dd>{subjects ? subjects.join(', ') : null}</dd>
+      </dl>
+
+      <nav className="text-center">
+        {id ? <EmailTypeNav emailId={id} /> : null}
+      </nav>
+
+      <section className="jumbotron">
+        {body ? (
+          <Switch>
+            <Route path={`/email/${id}/text`}>
+              <pre>{body.text}</pre>
+            </Route>
+            <Route>
+              <HTMLFrame>{body.html}</HTMLFrame>
+            </Route>
+          </Switch>
+        ) : 'Loading...'}
       </section>
     </article>
   );

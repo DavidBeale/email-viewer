@@ -2,6 +2,8 @@ import chai from 'chai';
 import sinon from 'sinon';
 
 import { getEmails, getEmailById } from '../../../src/email/services/EmailService';
+import emailsData from '../../../data/emails.json';
+import email1Data from '../../../data/email-1.json';
 
 const { expect } = chai;
 
@@ -17,9 +19,7 @@ describe('EmailService', () => {
 
   describe('getEmails', () => {
     beforeEach(() => {
-      global.fetch.returns(response(
-        [{}, {}, {}]
-      ));
+      global.fetch.returns(response(emailsData));
     });
 
     it('Gets the list of emails', async () => {
@@ -30,16 +30,12 @@ describe('EmailService', () => {
 
   describe('getEmailById', () => {
     beforeEach(() => {
-      global.fetch.returns(response(
-        {
-          id: 2
-        }
-      ));
+      global.fetch.returns(response(email1Data));
     });
 
     it('Get an email by Id', async () => {
-      const email = await getEmailById(2);
-      expect(email.id).to.equal(2);
+      const email = await getEmailById(1);
+      expect(email.id).to.equal('1');
     });
   });
 });

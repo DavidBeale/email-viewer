@@ -5,10 +5,10 @@ import EmailRow from './EmailRow';
 
 export default function EmailList({ emails }) {
   return (
-    <ul>
+    <ul className="list-group">
       {
         emails.map(email => (
-          <li key={email.id}>
+          <li key={email.id} className="list-group-item">
             <EmailRow email={email} />
           </li>
         ))

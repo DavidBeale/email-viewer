@@ -1,5 +1,5 @@
-import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import React, { Fragment } from 'react';
+import { Switch, Route, Link } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 
 import { history } from '../common/configureStore';
@@ -11,17 +11,29 @@ import NotFound from './components/NotFound';
 export default function Main() {
   return (
     <ConnectedRouter history={history}>
-      <main>
-        <Switch>
-          <Route exact path="/">
-            <EmailListContainer />
-          </Route>
-          <Route path="/email/:emailId">
-            <EmailPreviewContainer />
-          </Route>
-          <Route component={NotFound} />
-        </Switch>
-      </main>
+      <Fragment>
+
+        <nav className="navbar navbar-inverse">
+          <div className="container-fluid">
+            <div className="navbar-header">
+              <Link to="/" className="navbar-brand">Email Viewer</Link>
+            </div>
+          </div>
+        </nav>
+
+        <main className="container">
+          <Switch>
+            <Route exact path="/">
+              <EmailListContainer />
+            </Route>
+            <Route path="/email/:emailId">
+              <EmailPreviewContainer />
+            </Route>
+            <Route component={NotFound} />
+          </Switch>
+        </main>
+
+      </Fragment>
     </ConnectedRouter>
   );
 }
