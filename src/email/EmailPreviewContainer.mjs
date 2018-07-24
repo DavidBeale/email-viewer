@@ -6,15 +6,24 @@ import { loadEmails, loadEmailById } from './emailDuck';
 
 export default withRouter(withContainer(
   EmailPreview,
-  state => state.email,
+  state => ({
+    emails: state.email.emails,
+    currentEmail: state.email.emails.get(state.email.currentEmailId) || {}
+  }),
   {
     loadEmails,
     loadEmailById
   },
   {
     async componentDidMount() {
-      await this.props.loadEmails();
-      await this.props.loadEmailById(this.props.match.params.emailId);
+      if (this.props.emails.size === 0) {
+        await this.props.loadEmails();
+      }
+
+      const { emailId } = this.props.match.params;
+      if (!this.props.emails.get(emailId).body) {
+        await this.props.loadEmailById(emailId);
+      }
     }
   }
 ));

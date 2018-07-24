@@ -7,8 +7,8 @@ export default function EmailList({ emails }) {
   return (
     <ul className="list-group">
       {
-        emails.map(email => (
-          <li key={email.id} className="list-group-item">
+        Array.from(emails, ([id, email]) => (
+          <li key={id} className="list-group-item">
             <EmailRow email={email} />
           </li>
         ))
@@ -19,5 +19,5 @@ export default function EmailList({ emails }) {
 
 
 EmailList.propTypes = {
-  emails: PropTypes.arrayOf(PropTypes.shape()).isRequired
+  emails: PropTypes.instanceOf(Map).isRequired
 };

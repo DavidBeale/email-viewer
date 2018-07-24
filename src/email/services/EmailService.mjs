@@ -1,7 +1,12 @@
 
 export async function getEmails() {
-  const page = await call('/data/emails.json');
-  return page.collection.items;
+  const result = await call('/data/emails.json');
+  const emails = result.collection.items.reduce((map, email) => {
+    map.set(email.id, email);
+    return map;
+  }, new Map());
+
+  return emails;
 }
 
 

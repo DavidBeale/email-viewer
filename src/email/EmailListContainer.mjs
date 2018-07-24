@@ -11,7 +11,9 @@ export default withContainer(
   },
   {
     componentDidMount() {
-      this.props.loadEmails();
+      if (this.props.emails.size === 0) {
+        this.props.loadEmails();
+      }
     }
   }
 );

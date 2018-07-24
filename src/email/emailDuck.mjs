@@ -2,8 +2,8 @@ import { createAction, handleActions } from 'redux-actions';
 
 import { getEmails, getEmailById } from './services/EmailService';
 
-const LOAD_EMAILS = 'email/LOAD_EMAILS';
-const LOAD_EMAIL = 'email/LOAD_EMAIL';
+export const LOAD_EMAILS = 'email/LOAD_EMAILS';
+export const LOAD_EMAIL = 'email/LOAD_EMAIL';
 
 
 export async function loadEmails() {
@@ -36,16 +36,12 @@ export default handleActions(
       },
       LOAD_EMAIL: {
         next: (state, action) => {
-          const emails = state.emails.map((email) => {
-            if (action.payload.id === email.id) {
-              return action.payload;
-            }
-            return email;
-          });
+          const emails = new Map(state.emails);
+          emails.set(action.payload.id, action.payload);
 
           return {
             emails,
-            currentEmail: action.payload
+            currentEmailId: action.payload.id
           };
         },
         throw: state => state
@@ -53,7 +49,7 @@ export default handleActions(
     }
   },
   {
-    emails: [],
-    currentEmail: {}
+    emails: new Map(),
+    currentEmailId: ''
   }
 );

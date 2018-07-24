@@ -24,7 +24,8 @@ describe('EmailService', () => {
 
     it('Gets the list of emails', async () => {
       const emails = await getEmails();
-      expect(emails.length).to.equal(3);
+      expect(emails.size).to.equal(3);
+      expect(emails.get('2').name).to.equal('Name 2');
     });
   });
 
